@@ -3,6 +3,7 @@
 namespace DZunke\FeatureFlagsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -12,7 +13,7 @@ class Configuration implements ConfigurationInterface
     /**
      * @return TreeBuilder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('d_zunke_feature_flags');
         $rootNode    = $treeBuilder->getRootNode();
@@ -30,9 +31,9 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * @return ArrayNodeDefinition|\Symfony\Component\Config\Definition\Builder\NodeDefinition
+     * @return ArrayNodeDefinition|NodeDefinition
      */
-    private function addFlags()
+    private function addFlags(): ArrayNodeDefinition|NodeDefinition
     {
         $treeBuilder = new TreeBuilder('flags');
         $node        = $treeBuilder->getRootNode();

@@ -8,14 +8,14 @@ use PHPUnit\Framework\TestCase;
 class ToggleTest extends TestCase
 {
 
-    public function testDefaultStateIsTrue()
+    public function testDefaultStateIsTrue(): void
     {
         $sut = new Toggle();
 
         $this->assertTrue($sut->isActive('test'));
     }
 
-    public function testDefaultState()
+    public function testDefaultState(): void
     {
         $sut = new Toggle();
 
@@ -23,7 +23,7 @@ class ToggleTest extends TestCase
         $this->assertInstanceOf(Toggle::class, $sut->setDefaultState(false));
     }
 
-    public function testGetAndAddFlag()
+    public function testGetAndAddFlag(): void
     {
         $flagMock = self::createMock(Toggle\Flag::class);
         $flagMock->method('__toString')->willReturn('test_flag');
@@ -35,7 +35,7 @@ class ToggleTest extends TestCase
         $this->assertSame($flagMock, $sut->getFlag('test_flag'));
     }
 
-    public function testIsActive()
+    public function testIsActive(): void
     {
         $flagMock = $this->createMock(Toggle\Flag::class);
         $flagMock->method('__toString')->willReturn('MySpecialFeature');

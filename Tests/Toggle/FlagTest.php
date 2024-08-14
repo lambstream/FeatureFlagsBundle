@@ -11,7 +11,7 @@ use InvalidArgumentException;
 class FlagTest extends TestCase
 {
 
-    public function testIsActiveReturnsBool()
+    public function testIsActiveReturnsBool(): void
     {
         $conditionBagMock = $this->createMock(ConditionBag::class);
 
@@ -31,7 +31,7 @@ class FlagTest extends TestCase
         $this->assertFalse($sut->isActive());
     }
 
-    public function testIsActiveReturnsDefaultIfEmptyArray()
+    public function testIsActiveReturnsDefaultIfEmptyArray(): void
     {
         $conditionBagMock = $this->createMock(ConditionBag::class);
 
@@ -40,7 +40,7 @@ class FlagTest extends TestCase
         $this->assertTrue($sut->isActive('argument'));
     }
 
-    public function testGetConfigReturnsArray()
+    public function testGetConfigReturnsArray(): void
     {
         $conditionBagMock = $this->createMock(ConditionBag::class);
 
@@ -49,7 +49,7 @@ class FlagTest extends TestCase
         self::assertIsArray($sut->getConfig());
     }
 
-    public function testAddConditionThrowsException()
+    public function testAddConditionThrowsException(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -63,7 +63,7 @@ class FlagTest extends TestCase
         $this->assertInstanceOf(Flag::class, $return);
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $conditionBagMock = $this->createMock(ConditionBag::class);
 

@@ -32,7 +32,7 @@ class DeviceTest extends TestCase
         }
     }
 
-    public function testItExtendsCorrectly()
+    public function testItExtendsCorrectly(): void
     {
         $sut = new Device($this->requestStackMock);
 
@@ -40,14 +40,14 @@ class DeviceTest extends TestCase
         $this->assertInstanceOf(ConditionInterface::class, $sut);
     }
 
-    public function testIsReturnsFalseItConfigIsIncorrect()
+    public function testIsReturnsFalseItConfigIsIncorrect(): void
     {
         $sut = new Device($this->requestStackMock);
 
         $this->assertFalse($sut->validate(null));
     }
 
-    public function testItReturnsFalseIfUserAgentDoesNotExistInArray()
+    public function testItReturnsFalseIfUserAgentDoesNotExistInArray(): void
     {
         $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-User-Agent');
@@ -62,7 +62,7 @@ class DeviceTest extends TestCase
         $this->assertFalse($sut->validate([], null));
     }
 
-    public function testItReturnsBoolWhenCallingValidateWithoutArgument()
+    public function testItReturnsBoolWhenCallingValidateWithoutArgument(): void
     {
         $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->will($this->onConsecutiveCalls('Matched-User-Agent', 'Random-User-Agent'));
@@ -83,7 +83,7 @@ class DeviceTest extends TestCase
         $this->assertFalse($sut->validate($array, null));
     }
 
-    public function testItReturnsBoolWhenCallingValidateWithArgument()
+    public function testItReturnsBoolWhenCallingValidateWithArgument(): void
     {
         $headerBagMock = $this->createMock(HeaderBag::class);
         $headerBagMock->method('get')->with('User-Agent')->willReturn('Custom-Agent-3', 'Random-User-Agent');
@@ -104,7 +104,7 @@ class DeviceTest extends TestCase
         $this->assertFalse($sut->validate($array, 'second-agents'));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $sut = new Device($this->requestStackMock);
 

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class ContextTest extends TestCase
 {
 
-    public function testGetAndSet()
+    public function testGetAndSet(): void
     {
         $sut = new Context();
 
@@ -16,7 +16,7 @@ class ContextTest extends TestCase
         $this->assertSame('value', $sut->get('first'));
     }
 
-    public function testAll()
+    public function testAll(): void
     {
         $sut = new Context();
         $sut->set('first', 'value');
@@ -25,7 +25,7 @@ class ContextTest extends TestCase
         $this->assertSame(1, count($sut->all()));
     }
 
-    public function testClear()
+    public function testClear(): void
     {
         $sut = new Context();
         $sut->set('first', 'value');

@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class IpAddressTest extends TestCase
 {
 
-    public function testItExtendsCorrectly()
+    public function testItExtendsCorrectly(): void
     {
         $sut = new IpAddress();
 
@@ -19,7 +19,7 @@ class IpAddressTest extends TestCase
         $this->assertInstanceOf(ConditionInterface::class, $sut);
     }
 
-    public function testItReturnsTrue()
+    public function testItReturnsTrue(): void
     {
         $contextMock = $this->createMock(Context::class);
         $contextMock->method('get')->will($this->onConsecutiveCalls('127.0.0.1', '169.168.1.12'));
@@ -38,7 +38,7 @@ class IpAddressTest extends TestCase
         $this->assertFalse($sut->validate($array));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $sut = new IpAddress();
 

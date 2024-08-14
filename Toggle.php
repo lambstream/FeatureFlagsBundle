@@ -21,7 +21,7 @@ class Toggle
      * @param bool $defaultState
      * @return $this
      */
-    public function setDefaultState($defaultState)
+    public function setDefaultState($defaultState): self
     {
         $this->defaultState = (bool)$defaultState;
 
@@ -32,7 +32,7 @@ class Toggle
      * @param Flag $flag
      * @return $this
      */
-    public function addFlag(Flag $flag)
+    public function addFlag(Flag $flag): self
     {
         $this->flags[(string)$flag] = $flag;
 
@@ -43,7 +43,7 @@ class Toggle
      * @param $name
      * @return Flag|null
      */
-    public function getFlag($name)
+    public function getFlag($name): ?Flag
     {
         if (isset($this->flags[$name])) {
             return $this->flags[$name];
@@ -55,7 +55,7 @@ class Toggle
     /**
      * @return Toggle\Flag[]
      */
-    public function getFlags()
+    public function getFlags(): array
     {
         return $this->flags;
     }
@@ -65,7 +65,7 @@ class Toggle
      * @param array  $arguments
      * @return bool
      */
-    public function isActive($flag, $arguments = null)
+    public function isActive($flag, $arguments = null): bool
     {
         if (!isset($this->flags[$flag])) {
             return $this->defaultState;

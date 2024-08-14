@@ -26,7 +26,7 @@ class PercentageTest extends TestCase
 
     }
 
-    public function testItExtendsCorrectly()
+    public function testItExtendsCorrectly(): void
     {
         $sut = new Percentage($this->requestStackMock);
 
@@ -34,7 +34,7 @@ class PercentageTest extends TestCase
         $this->assertInstanceOf(ConditionInterface::class, $sut);
     }
 
-    public function testItThrowsExceptionWhenPercentageIsNotSet()
+    public function testItThrowsExceptionWhenPercentageIsNotSet(): void
     {
         $this->expectException(Exception::class);
 
@@ -42,7 +42,7 @@ class PercentageTest extends TestCase
         $sut->validate([], 'nothing');
     }
 
-    public function testItReturnsTrueWhenCookieIsAlreadySet()
+    public function testItReturnsTrueWhenCookieIsAlreadySet(): void
     {
         $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
@@ -60,7 +60,7 @@ class PercentageTest extends TestCase
         ]));
     }
 
-    public function testItReturnsBoolWhenCookieIsNotSet()
+    public function testItReturnsBoolWhenCookieIsNotSet(): void
     {
         $parameterBagMock = $this->createMock(ParameterBag::class);
         $parameterBagMock->method('has')->willReturn(true);
@@ -75,7 +75,7 @@ class PercentageTest extends TestCase
         self::assertIsBool($sut->validate(['percentage' => 3]));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $sut = new Percentage($this->requestStackMock);
 

@@ -2,22 +2,12 @@
 
 namespace DZunke\FeatureFlagsBundle\Toggle;
 
-class Flag
+class Flag implements \Stringable
 {
-    /**
-     * @var string
-     */
-    private $name;
-
     /**
      * @var bool
      */
     private $active;
-
-    /**
-     * @var ConditionBag
-     */
-    private $conditions;
 
     /**
      * @var array
@@ -28,18 +18,17 @@ class Flag
      * @param              $name
      * @param ConditionBag $conditions
      * @param bool         $defaultState
+     * @param string $name
      */
-    public function __construct($name, ConditionBag $conditions, $defaultState = true)
+    public function __construct(private $name, private readonly ConditionBag $conditions, $defaultState = true)
     {
-        $this->name       = $name;
-        $this->conditions = $conditions;
         $this->active     = (bool)$defaultState;
     }
 
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->name;
     }
@@ -49,7 +38,7 @@ class Flag
      * @param $config
      * @return $this
      */
-    public function addCondition($name, $config)
+    public function addCondition($name, $config): self
     {
         if (!$this->conditions->has($name)) {
             throw new \InvalidArgumentException(
@@ -65,7 +54,7 @@ class Flag
     /**
      * @return array
      */
-    public function getConfig()
+    public function getConfig(): array
     {
         return $this->config;
     }
@@ -74,7 +63,7 @@ class Flag
      * @param array $arguments
      * @return bool
      */
-    public function isActive($arguments = null)
+    public function isActive($arguments = null): bool
     {
         $actual = $this->active;
 

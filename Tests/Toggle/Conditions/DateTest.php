@@ -14,34 +14,34 @@ class DateTest extends TestCase
     /**
      * @var string
      */
-    const CURRENT_DATE = "2016-09-02T00:00:00Z";
+    public const CURRENT_DATE = "2016-09-02T00:00:00Z";
 
     /**
      * @var string
      */
-    const FUTURE_DATE1 = "2020-12-25T12:00:00Z";
+    public const FUTURE_DATE1 = "2020-12-25T12:00:00Z";
 
     /**
      * @var string
      */
-    const FUTURE_DATE2 = "2017-0-0T00:00:00Z";
+    public const FUTURE_DATE2 = "2017-0-0T00:00:00Z";
 
     /**
      * @var string
      */
-    const PAST_DATE1 = "1970-01-01T00:00:00Z";
+    public const PAST_DATE1 = "1970-01-01T00:00:00Z";
 
     /**
      * @var string
      */
-    const PAST_DATE2 = "2014-01-01T00:00:00Z";
+    public const PAST_DATE2 = "2014-01-01T00:00:00Z";
 
     /**
      * Returns an instance of Date with a known "current" date.
      *
      * @return Date
      */
-    public function getInstanceOfDate()
+    public function getInstanceOfDate(): Date
     {
         $contextMock = $this->createMock(Context::class);
 
@@ -56,7 +56,7 @@ class DateTest extends TestCase
         return $date;
     }
 
-    public function testItExtendsCorrectly()
+    public function testItExtendsCorrectly(): void
     {
         $sut = $this->getInstanceOfDate();
 
@@ -64,14 +64,14 @@ class DateTest extends TestCase
         $this->assertInstanceOf(ConditionInterface::class, $sut);
     }
 
-    public function testItReturnsTrueWithoutStartOrEndDate()
+    public function testItReturnsTrueWithoutStartOrEndDate(): void
     {
         $config = [];
         $sut = $this->getInstanceOfDate();
         $this->assertTrue($sut->validate($config));
     }
 
-    public function testItReturnsTrueWithPastStartDate()
+    public function testItReturnsTrueWithPastStartDate(): void
     {
         $sut = $this->getInstanceOfDate();
         $this->assertTrue($sut->validate([
@@ -88,7 +88,7 @@ class DateTest extends TestCase
         ]));
     }
 
-    public function testItReturnsTrueWithFutureEndDate()
+    public function testItReturnsTrueWithFutureEndDate(): void
     {
         $sut = $this->getInstanceOfDate();
         $this->assertTrue($sut->validate([
@@ -105,7 +105,7 @@ class DateTest extends TestCase
         ]));
     }
 
-    public function testItReturnsTrueWhenBetweenPastStartAndFutureEndDate()
+    public function testItReturnsTrueWhenBetweenPastStartAndFutureEndDate(): void
     {
         $sut = $this->getInstanceOfDate();
         $this->assertTrue($sut->validate([
@@ -126,7 +126,7 @@ class DateTest extends TestCase
         ]));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $sut = $this->getInstanceOfDate();
 
