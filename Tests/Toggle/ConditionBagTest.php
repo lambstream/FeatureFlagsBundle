@@ -12,14 +12,14 @@ use ArrayIterator;
 class ConditionBagTest extends TestCase
 {
 
-    public function testItImplementsClasses()
+    public function testItImplementsClasses(): void
     {
         $sut = new ConditionBag();
         $this->assertInstanceOf(IteratorAggregate::class, $sut);
         $this->assertInstanceOf(Countable::class, $sut);
     }
 
-    public function testConditionBag()
+    public function testConditionBag(): void
     {
         $conditionMock = $this->createMock(ConditionInterface::class);
         $conditionMock->method('__toString')->willReturn('test_condition');

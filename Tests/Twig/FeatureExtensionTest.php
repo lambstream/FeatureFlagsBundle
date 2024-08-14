@@ -10,7 +10,7 @@ use Twig\TwigFunction;
 class FeatureExtensionTest extends TestCase
 {
 
-    public function testGetFunctions()
+    public function testGetFunctions(): void
     {
         $toggleMock = $this->createMock(Toggle::class);
 
@@ -21,7 +21,7 @@ class FeatureExtensionTest extends TestCase
         $this->assertInstanceOf(TwigFunction::class, reset($functions));
     }
 
-    public function testGetName()
+    public function testGetName(): void
     {
         $toggleMock = $this->createMock(Toggle::class);
 

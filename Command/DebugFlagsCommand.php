@@ -10,24 +10,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DebugFlagsCommand extends Command
 {
-    /**
-     * @var Toggle
-     */
-    private $toggle;
-
-    /**
-     * @var Toggle\ConditionBag
-     */
-    private $conditionBag;
-
-    public function __construct(Toggle $toggle, Toggle\ConditionBag $conditionBag)
+    public function __construct(private readonly Toggle $toggle, private readonly Toggle\ConditionBag $conditionBag)
     {
         parent::__construct();
-        $this->toggle = $toggle;
-        $this->conditionBag = $conditionBag;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('dzunke:feature_flags:debug')
@@ -50,7 +38,7 @@ class DebugFlagsCommand extends Command
         $table->setStyle('borderless');
         $table->setHeaders(['name', 'class']);
         foreach ($this->conditionBag as $name => $condition) {
-            $table->addRow([$name, get_class($condition)]);
+            $table->addRow([$name, $condition::class]);
         }
         $table->render();
 
@@ -67,7 +55,7 @@ class DebugFlagsCommand extends Command
         return 0;
     }
 
-    private function renderFlagsTable(OutputInterface $output)
+    private function renderFlagsTable(OutputInterface $output): void
     {
         $flags = $this->toggle->getFlags();
         if (empty($flags)) {

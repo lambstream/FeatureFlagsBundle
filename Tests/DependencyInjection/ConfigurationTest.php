@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class ConfigurationTest extends TestCase
 {
-    public function testDefaultConfigurationCouldBeLoaded()
+    public function testDefaultConfigurationCouldBeLoaded(): void
     {
         $container = new ContainerBuilder();
         $extension = new DZunkeFeatureFlagsExtension();

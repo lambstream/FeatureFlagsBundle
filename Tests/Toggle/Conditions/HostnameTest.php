@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 class HostnameTest extends TestCase
 {
 
-    public function testItExtendsCorrectly()
+    public function testItExtendsCorrectly(): void
     {
         $sut = new Hostname();
 
@@ -19,7 +19,7 @@ class HostnameTest extends TestCase
         $this->assertInstanceOf(ConditionInterface::class, $sut);
     }
 
-    public function testItReturnsBoolean()
+    public function testItReturnsBoolean(): void
     {
         $contextMock = $this->createMock(Context::class);
         $contextMock->method('get')->will($this->onConsecutiveCalls('myhostname', 'thirdhostname'));
@@ -37,7 +37,7 @@ class HostnameTest extends TestCase
         $this->assertTrue($sut->validate($array));
     }
 
-    public function testToString()
+    public function testToString(): void
     {
         $sut = new Hostname();
 

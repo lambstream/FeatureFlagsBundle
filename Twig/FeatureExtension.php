@@ -28,7 +28,7 @@ class FeatureExtension extends AbstractExtension
     public function getFunctions(): array
     {
         return [
-            new TwigFunction('has_feature', [$this, 'checkFeature'], ['is_safe' => ['html']]),
+            new TwigFunction('has_feature', $this->checkFeature(...), ['is_safe' => ['html']]),
         ];
     }
 
@@ -37,12 +37,12 @@ class FeatureExtension extends AbstractExtension
      * @param  array  $arguments
      * @return bool
      */
-    public function checkFeature($name, $arguments = null)
+    public function checkFeature($name, $arguments = null): bool
     {
         return $this->toggle->isActive($name, $arguments);
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'd_zunke_feature_extension';
     }

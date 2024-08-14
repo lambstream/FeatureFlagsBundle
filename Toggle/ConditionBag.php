@@ -10,7 +10,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
     /**
      * @var ConditionInterface[]
      */
-    protected $conditions = [];
+    protected array $conditions = [];
 
     /**
      * @return \ArrayIterator
@@ -31,7 +31,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
     /**
      * @return Conditions\ConditionInterface[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->conditions;
     }
@@ -40,7 +40,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
      * @param array $conditions
      * @return $this
      */
-    public function add(array $conditions)
+    public function add(array $conditions): self
     {
         foreach ($conditions as $condition) {
             $this->set((string)$condition, $condition);
@@ -54,7 +54,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
      * @param ConditionInterface $condition
      * @return $this
      */
-    public function set($name, ConditionInterface $condition)
+    public function set(string $name, ConditionInterface $condition): self
     {
         $this->conditions[$name] = $condition;
 
@@ -62,18 +62,18 @@ class ConditionBag implements \IteratorAggregate, \Countable
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return ConditionInterface|null
      */
-    public function get($name)
+    public function get(string $name): ?ConditionInterface
     {
-        return isset($this->conditions[$name]) ? $this->conditions[$name] : null;
+        return $this->conditions[$name] ?? null;
     }
 
     /**
      * @return array
      */
-    public function keys()
+    public function keys(): array
     {
         return array_keys($this->conditions);
     }
@@ -82,7 +82,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
      * @param string $name
      * @return bool
      */
-    public function has($name)
+    public function has(string $name): bool
     {
         return array_key_exists($name, $this->conditions);
     }
@@ -91,7 +91,7 @@ class ConditionBag implements \IteratorAggregate, \Countable
      * @param string $name
      * @return $this
      */
-    public function remove($name)
+    public function remove(string $name): self
     {
         unset($this->conditions[$name]);
 

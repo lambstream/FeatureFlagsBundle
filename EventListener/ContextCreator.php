@@ -8,25 +8,18 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 class ContextCreator
 {
     /**
-     * @var Context
-     */
-    private $context;
-
-    /**
      * @param Context $context
      */
-    public function __construct(Context $context)
+    public function __construct(private readonly Context $context)
     {
-        $this->context = $context;
     }
 
     /**
      * @param RequestEvent $event
      */
-    public function onKernelRequest(RequestEvent $event)
+    public function onKernelRequest(RequestEvent $event): void
     {
         $this->context->set('client_ip', $event->getRequest()->getClientIp());
         $this->context->set('hostname', $event->getRequest()->getHost());
     }
-
 }

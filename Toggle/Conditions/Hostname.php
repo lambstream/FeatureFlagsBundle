@@ -10,7 +10,7 @@ class Hostname extends AbstractCondition implements ConditionInterface
      * @param null  $argument
      * @return bool
      */
-    public function validate($config, $argument = null)
+    public function validate($config, $argument = null): bool
     {
         return in_array(
             $this->context->get('hostname'),
@@ -21,7 +21,7 @@ class Hostname extends AbstractCondition implements ConditionInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return 'hostname';
     }

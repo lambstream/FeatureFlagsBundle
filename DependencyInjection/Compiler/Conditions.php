@@ -13,7 +13,7 @@ class Conditions implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         if (true !== $container->getParameterBag()->has('d_zunke_feature_flags.config')) {
             throw new \RuntimeException('No parameters with name \'d_zunke_feature_flags.config\' could be found');
@@ -28,7 +28,7 @@ class Conditions implements CompilerPassInterface
      * @param array $config
      * @param ContainerBuilder $container
      */
-    private function configureToggle(array $config, ContainerBuilder $container)
+    private function configureToggle(array $config, ContainerBuilder $container): void
     {
         $definition = $container->getDefinition('dz.feature_flags.toggle');
         $definition->addMethodCall('setDefaultState', [$config['default']]);
@@ -52,7 +52,7 @@ class Conditions implements CompilerPassInterface
     /**
      * @param ContainerBuilder $container
      */
-    private function fillConditionsBag(ContainerBuilder $container)
+    private function fillConditionsBag(ContainerBuilder $container): void
     {
         $taggedConditions = $container->findTaggedServiceIds('dz.feature_flags.toggle.condition');
 
@@ -76,7 +76,7 @@ class Conditions implements CompilerPassInterface
      *
      * @return Definition
      */
-    private function createFlagDefinition($name, Reference $reference, $default)
+    private function createFlagDefinition($name, Reference $reference, $default): Definition
     {
         return new Definition(
             Flag::class,
@@ -92,7 +92,7 @@ class Conditions implements CompilerPassInterface
      * @param Definition $flag
      * @param array $config
      */
-    private function processFlagConditions(Definition $flag, array $config)
+    private function processFlagConditions(Definition $flag, array $config): void
     {
         foreach($config as $condition => $optionalValues) {
             $flag->addMethodCall(

@@ -8,17 +8,14 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class Percentage extends AbstractCondition implements ConditionInterface
 {
 
-    const BASIC_COOKIE_NAME = '84a0b3f187a1d3bfefbb51d4b93074b1e5d9102a';
+    public const BASIC_COOKIE_NAME = '84a0b3f187a1d3bfefbb51d4b93074b1e5d9102a';
 
-    const BASIC_PERCENTAGE = 100;
+    public const BASIC_PERCENTAGE = 100;
 
-    const BASIC_LIFETIME = 86400;
+    public const BASIC_LIFETIME = 86400;
 
-    private RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
     }
 
     /**
@@ -27,7 +24,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
      * @return bool
      * @throws \Exception
      */
-    public function validate($config, $argument = null)
+    public function validate($config, $argument = null): bool
     {
         $config = $this->formatConfig($config);
 
@@ -39,7 +36,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
         setcookie(
             $config['cookie'],
             $value,
-            time() + $config['lifetime']
+            ['expires' => time() + $config['lifetime']]
         );
 
         return (bool)$value;
@@ -65,7 +62,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
     /**
      * @return int
      */
-    private function generateRandomNumber()
+    private function generateRandomNumber(): int
     {
         return 100 * (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax());
     }
@@ -73,7 +70,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return 'percentage';
     }

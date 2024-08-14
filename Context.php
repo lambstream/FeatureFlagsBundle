@@ -15,7 +15,7 @@ class Context
      * @param mixed  $value
      * @return $this
      */
-    public function set($name, $value)
+    public function set($name, $value): self
     {
         $this->context[(string)$name] = $value;
 
@@ -34,7 +34,7 @@ class Context
     /**
      * @return array
      */
-    public function all()
+    public function all(): array
     {
         return $this->context;
     }
@@ -42,7 +42,7 @@ class Context
     /**
      * @return $this
      */
-    public function clear()
+    public function clear(): self
     {
         $this->context = [];
 
