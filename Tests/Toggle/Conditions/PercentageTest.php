@@ -7,7 +7,7 @@ use DZunke\FeatureFlagsBundle\Toggle\Conditions\ConditionInterface;
 use DZunke\FeatureFlagsBundle\Toggle\Conditions\Percentage;
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
+use Symfony\Component\HttpFoundation\InputBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -44,12 +44,8 @@ class PercentageTest extends TestCase
 
     public function testItReturnsTrueWhenCookieIsAlreadySet(): void
     {
-        $parameterBagMock = $this->createMock(ParameterBag::class);
-        $parameterBagMock->method('has')->willReturn(true);
-        $parameterBagMock->method('get')->willReturn(1);
-
         $requestMock = $this->createMock(Request::class);
-        $requestMock->cookies = $parameterBagMock;
+        $requestMock->cookies = new InputBag([Percentage::BASIC_COOKIE_NAME => '1']);
 
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);
@@ -60,13 +56,14 @@ class PercentageTest extends TestCase
         ]));
     }
 
+    /**
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
+     */
     public function testItReturnsBoolWhenCookieIsNotSet(): void
     {
-        $parameterBagMock = $this->createMock(ParameterBag::class);
-        $parameterBagMock->method('has')->willReturn(true);
-
         $requestMock = $this->createMock(Request::class);
-        $requestMock->cookies = $parameterBagMock;
+        $requestMock->cookies = new InputBag();
 
         $requestStackMock = $this->createMock(RequestStack::class);
         $requestStackMock->method('getMainRequest')->willReturn($requestMock);

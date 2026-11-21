@@ -3,25 +3,22 @@
 namespace DZunke\FeatureFlagsBundle\Command;
 
 use DZunke\FeatureFlagsBundle\Toggle;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+    name: 'dzunke:feature_flags:debug',
+    description: 'Debugging Feature Flags',
+)]
 class DebugFlagsCommand extends Command
 {
     public function __construct(private readonly Toggle $toggle, private readonly Toggle\ConditionBag $conditionBag)
     {
         parent::__construct();
     }
-
-    protected function configure(): void
-    {
-        $this
-            ->setName('dzunke:feature_flags:debug')
-            ->setDescription('Debugging Feature Flags');
-    }
-
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
@@ -52,7 +49,7 @@ class DebugFlagsCommand extends Command
 
         $output->writeln('');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function renderFlagsTable(OutputInterface $output): void

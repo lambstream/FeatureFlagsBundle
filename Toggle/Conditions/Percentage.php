@@ -35,7 +35,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
         $value = (int)($this->generateRandomNumber() < $config['percentage']);
         setcookie(
             $config['cookie'],
-            $value,
+            (string)$value,
             ['expires' => time() + $config['lifetime']]
         );
 
@@ -64,7 +64,7 @@ class Percentage extends AbstractCondition implements ConditionInterface
      */
     private function generateRandomNumber(): int
     {
-        return 100 * (mt_rand(0, mt_getrandmax() - 1) / mt_getrandmax());
+        return random_int(0, 99);
     }
 
     /**
